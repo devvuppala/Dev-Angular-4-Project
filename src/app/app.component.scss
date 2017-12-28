@@ -1,0 +1,25 @@
+.premium {
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    float :left;
+    display: block;
+}
+
+.status {
+    width: 10px;
+    height: 10px;
+    float :left;
+    display: block;
+    margin:8px 10px 0 0;
+    border-radius: 50%;
+    background-color: orange;
+    &.premium {
+        background-color: green;
+    } 
+    
+    &.non-premium{
+        background-color: red;  
+    } 
+
+}

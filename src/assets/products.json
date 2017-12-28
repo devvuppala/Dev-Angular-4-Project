@@ -1,0 +1,25 @@
+{
+    "productsNew" : [
+        {
+            "id":1,
+            "name":"Outliers",
+            "type":"Books",
+            "premium":true
+          } , {
+            "id":2,
+            "name":"Math",
+            "type":"Books",
+            "premium":true
+          } , {
+            "id":3,
+            "name":"Carrom",
+            "type":"Books",
+            "premium":false
+          } , {
+            "id":4,
+            "name":"One More",
+            "type":"Books",
+            "premium":true
+          }
+    ]
+}

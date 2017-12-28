@@ -16,7 +16,31 @@ interface Product {
         <img width="45" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="> Welcome to {{title}}
         </h1>      
     </div>
-    <product-catalog></product-catalog>
+    
+    <div>
+      <input type="number"   [(ngModel)] = "amount"/>
+      <h1>Amount : {{amount}} </h1>
+    </div>
+
+    <div>
+      <label>{{product.name}}</label>
+    </div>
+    <div>
+      <label>{{product.type}}</label>
+    </div>
+    <div>
+      <span *ngIf="product.premium" class="premium"></span>
+      <label>{{product.premium}}</label>
+    </div> 
+    <div *ngFor="let product of products" >
+      <div>_________________________________</div>
+      <div><label>{{product.name}}</label></div>
+      <div><label>{{product.type}}</label></div>
+      <div >
+      <span class="status" [ngClass] = "{'premium':product.premium, 'non-preimum':!product.premium}"></span>
+      <label>{{product.premium}}
+      </label></div>
+    </div>  
   `
 })
 

@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Outliers8989999",
+      "type": "Books",
+      "premium": true
+    },
+    {
+      "id": 2,
+      "name": "Math",
+      "type": "Books",
+      "premium": true
+    },
+    {
+      "id": 3,
+      "name": "Carrom",
+      "type": "Books",
+      "premium": false
+    },
+    {
+      "id": 999,
+      "name": "Dad",
+      "type": "Dad",
+      "premium": false
+    },
+    {
+      "id": 5,
+      "name": "mac",
+      "type": "Computer",
+      "premium": false
+    }
+  ]
+}

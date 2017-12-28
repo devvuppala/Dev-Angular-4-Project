@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <script>
+            let customer = {
+                name:'RRR',
+                occ:'SE',
+                addr:'WI',
+                age:'22'
+            }
+
+            //let alias = customer;
+            let alias = Object.assign({},customer);
+
+            if(alias == customer) {
+                console.log(alias.name == customer.name);
+                console.log(alias.occ == customer.occ);
+                console.log(alias.addr == customer.addr);
+                console.log(alias.age == customer.age);
+            } else {
+                console.log("Different");
+            }
+        </script>
+    </head>
+</html>
