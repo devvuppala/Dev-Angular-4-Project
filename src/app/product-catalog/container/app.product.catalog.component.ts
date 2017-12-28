@@ -27,43 +27,32 @@ import { error } from 'selenium-webdriver';
     <!--<div>Product Item Catalog Component </div>-->
     
     <!--Class 7-->
-    <!--<div class="container">
-        <product-list [products] = "products" (onDetails)="onProductDetails($event)"></product-list>
-    </div>-->
+    <div  class="container">
+        <product-list [products] = "products"
+                    (onDetails)="onProductDetails($event)"
+                    (onChangeOfValue) = "handleChangeOfValue($event)"  
+                    (onDelete) = "onDeleteProduct($event)"></product-list>
+    </div>
 
-    
-    <div class="container">  
-    
-        <h2>Products Table : {{products?.length}} Products</h2>    
-        <table class="table"> 
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Product Type</th>
-                    <th>Product Premium</th>
-                    <th>Action(s)</th>
-                </tr>
-            </thead>  
-            <tbody>
-                 
-                <div *ngFor="let product of products">
-                    
-                        <product-item [productValue] = "product" (onChangeOfValue) = "handleChangeOfValue($event)"  
-                                (onDelete) = "onDeleteProduct($event)"></product-item>
-                    
-                </div>                        
-            </tbody>
-        </table>
-        
+    <div class="container">        
         <div>
-            <button style="float:center" class="btn btn-success" (click)="showNewProductDetails()">Add</button>
+            <button style="float:right" class="btn btn-success" (click)="showNewProductDetails()">+ Add Product</button>
         </div>
 
-        <div *ngIf="showProductDetails">
+        <div *ngIf="showProductAddDetails">
             <product-add (onAdd) = "onProductAdd($event)"></product-add>
         </div>
     </div>
+    <!--<div class="container">                 
+        <div *ngFor="let product of products">
+                <product-item [productValue] = "product" ></product-item>
+        </div> 
+    </div>-->
+
+    <div class="container" *ngIf="showSelectedProductDetails">
+        <product-item [productValue] = "selectedProduct" 
+        (submitEditedProduct) = "SubmitProductChanges($event)"></product-item>
+     </div> 
     `
 
 })
@@ -75,8 +64,10 @@ export class ProductCatalogComponent { // Export the component
     //When you use ProductService , it will search the moodule (app.product.catalog.module.ts) and will see if it is available
     products: ProductModel[];
     //Show or hide Product details
-    showProductDetails: boolean = false;
+    showProductAddDetails: boolean = false;
     error:String = null;
+    selectedProduct:ProductModel;
+    showSelectedProductDetails: boolean = false;
     constructor(private productService: ProductService) {
         /*this.products =  this.productService.getProducts();*/
         //Do not write any business logic here
@@ -104,9 +95,9 @@ export class ProductCatalogComponent { // Export the component
             } else {
                 return target;
             }
-        })
+        })*/
 
-        console.log("In Product catalog Component", productHere);*/
+        console.log("In Product catalog Component", productHere);
 
         this.productService.updateProduct(productHere).subscribe((response:ProductModel) => {
             this.products = this.products.map((product:ProductModel) => {
@@ -120,16 +111,17 @@ export class ProductCatalogComponent { // Export the component
     }
 
     showNewProductDetails() {
-        this.showProductDetails = true;
+        this.showProductAddDetails = true;
     }
 
     onProductAdd(newProduct:ProductModel){
         console.log("In onProductAdd");
         //this.products.push(product); -- One way
         //this.products = [...this.products,product]; // Spread operator ,  this will make the product as immutable
+        //console.log(newProduct);
         this.productService.createProduct(newProduct).subscribe((response:ProductModel) => {
             this.loadProducts();
-            this.showProductDetails = false;
+            this.showProductAddDetails = false; 
         });
             
     }
@@ -146,7 +138,7 @@ export class ProductCatalogComponent { // Export the component
                 }
             })
         });*/
-
+        //alert(deletedProduct);
         this.productService.removeProduct(deletedProduct).subscribe((response:ProductModel) => {
             this.loadProducts();
         })
@@ -158,11 +150,26 @@ export class ProductCatalogComponent { // Export the component
             this.products = productArray;
         });
     }
-   /*onProductDetails(product:ProductModel){
-        this.productService.fetchAProduct(product.id).subscribe(res:ProductModel)=> {
-                this.showProductDetails = true;
-                this.selectedProduct = res;
+
+    onProductDetails(product:ProductModel){
+        this.productService.fetchAproduct(product.id).subscribe((response:ProductModel) => {
+                this.showSelectedProductDetails = true;
+                this.selectedProduct = response;
         });
-        }
-    }*/
+    }
+
+    SubmitProductChanges(productHere: ProductModel) { 
+         this.productService.updateProduct(productHere).subscribe((response:ProductModel) => {
+             this.products = this.products.map((product:ProductModel) => {
+                 if(product.id === productHere.id) {
+                     return Object.assign({},product,productHere);
+                 } else {
+                     return product;
+                 }
+             });
+         }, (error:any) => this.error = error.statusText);       
+
+        this.showSelectedProductDetails = false;
+     }
+    
 }

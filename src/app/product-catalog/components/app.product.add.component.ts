@@ -15,8 +15,8 @@
         <input type="text" [(ngModel)] = "product.name" placeholder="Enter the product name">
         <input type="text" [(ngModel)] = "product.type" placeholder="Enter the product Type">
         <select [(ngModel)] = "product.premium" >
-            <option value=true>False</option>
-            <option value=false>True</option>
+            <option value=false>False</option>
+            <option value=true>True</option>
         </select>
         <button (click) = "addProduct()" class="btn btn-success">+</button>
       </div> 

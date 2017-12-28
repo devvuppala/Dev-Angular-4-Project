@@ -1,32 +1,32 @@
 {
   "products": [
     {
+      "id": 3,
+      "name": "Mac book pro",
+      "type": "Computers",
+      "premium": "true"
+    },
+    {
       "id": 1,
-      "name": "Outliers8989999",
-      "type": "Books",
-      "premium": true
+      "name": "Monitor (Samsung)",
+      "type": "Computer",
+      "premium": "true"
     },
     {
       "id": 2,
-      "name": "Math",
-      "type": "Books",
-      "premium": true
+      "name": "CPU",
+      "type": "Computers",
+      "premium": "true"
     },
     {
-      "id": 3,
-      "name": "Carrom",
-      "type": "Books",
-      "premium": false
-    },
-    {
-      "id": 999,
-      "name": "Dad",
-      "type": "Dad",
-      "premium": false
+      "id": 4,
+      "name": "Hard disk",
+      "type": "Computers",
+      "premium": "true"
     },
     {
       "id": 5,
-      "name": "mac",
+      "name": "Cable",
       "type": "Computer",
       "premium": false
     }

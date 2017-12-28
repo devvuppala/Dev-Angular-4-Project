@@ -53,7 +53,7 @@ export class ProductService {
 
 
     fetchAproduct(id:number): Observable<ProductModel> {
-      return this.http.delete(`${PRODUCT_API}/${id}`)
+      return this.http.get(`${PRODUCT_API}/${id}`)
                       .map((response:Response) => response.json()).catch(error => Observable.throw(error.json))
     }
 

@@ -8,27 +8,66 @@
   @Component({
       selector:'product-list', // Selector is used on the pages to display what ever is in the template
       template: `
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let product of products">
-                {{product.name}}
-                <span style="float:right">
-                    <button class="btn btn-success" (click)="showDetails(product)">Details</button>
-                </span>
-            </li>
-        </ul>  
+        <h2>Products Table : {{products?.length}} Products</h2>    
+        <!-- New bootstrap Table -->
+        <table class="table table-bordered"> 
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Product Type</th>
+                    <th>Product Premium</th>
+                    <th>Action(s)</th>
+                </tr>
+            </thead>  
+            <tbody>
+                <ng-container *ngFor="let product of products">
+                    <tr>                  
+                        <td>{{product.id}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.type}}</td>
+                        <td>{{product.premium}}</td>
+                        <td float=left>
+                            <!--<button style="float:right" class="btn btn-primary" (click) = "emitProduct(product)" >Emit</button>-->
+                            <button style="float:right" class="btn btn-warning" (click) = "deleteProduct(product)" >Delete(-)</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <span style="float:right">
+                                <button class="btn btn-success" (click)="showDetails(product)">Details / Edit</button>
+                            </span>
+                        </td>
+                    </tr>
+                </ng-container>                      
+            </tbody>
+        </table>
+            
+        
       ` 
   })
   
   export class ProductItemListComponent { // Export the component
     //Recieve the Data passed by the smart component
+    @Input() products : ProductModel[];
+
     @Input() productValue : ProductModel;
 
-    @Output() onDetails: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
+    @Output() onDetails: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();    
+
+    @Output() onChangeOfValue: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
+
+    @Output() onDelete: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
 
     showDetails(product:ProductModel) {
         console.log("Product List Component" , product);
         this.onDetails.emit(product);    
     }
     
+    //Method that emits the Product
+    emitProduct(product:ProductModel) {
+        this.onChangeOfValue.emit(product);
+    }
+      
+    deleteProduct(product:ProductModel) {
+        this.onDelete.emit(product);
+    }
       
   }
