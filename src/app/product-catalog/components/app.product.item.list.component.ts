@@ -3,7 +3,8 @@
   */
 
   import {Component,Input,Output,EventEmitter} from '@angular/core' //Import component 
-  import {ProductModel} from '../model/app.product.model';
+  import {ProductModel} from '../model/app.product.model';  
+  import {Router} from '@angular/router'
   
   @Component({
       selector:'product-list', // Selector is used on the pages to display what ever is in the template
@@ -32,7 +33,10 @@
                             <button style="float:right" class="btn btn-warning" (click) = "deleteProduct(product)" >Delete(-)</button>
                             &nbsp;&nbsp;&nbsp;
                             <span style="float:right">
-                                <button class="btn btn-success" (click)="showDetails(product)">Details / Edit</button>
+                                <button class="btn btn-success" (click)="editProduct(product)">Edit</button>
+                            </span>
+                            <span style="float:right">
+                                <button class="btn btn-success" (click)="showProductDetails(product)">Details</button>
                             </span>
                         </td>
                     </tr>
@@ -50,15 +54,20 @@
 
     @Input() productValue : ProductModel;
 
-    @Output() onDetails: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();    
+    @Output() onEditProduct: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();    
 
     @Output() onChangeOfValue: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
 
     @Output() onDelete: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
 
-    showDetails(product:ProductModel) {
+    @Output() onShowProductDetails: EventEmitter<ProductModel> = new EventEmitter<ProductModel>();
+
+    constructor(private router:Router) { // Activated Route is used to fecth the parameters
+
+    }
+    editProduct(product:ProductModel) {
         console.log("Product List Component" , product);
-        this.onDetails.emit(product);    
+        this.onEditProduct.emit(product);    
     }
     
     //Method that emits the Product
@@ -68,6 +77,10 @@
       
     deleteProduct(product:ProductModel) {
         this.onDelete.emit(product);
+    }
+
+    showProductDetails(product:ProductModel) {
+        this.onShowProductDetails.emit(product);
     }
       
   }

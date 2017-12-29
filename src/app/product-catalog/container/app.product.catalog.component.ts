@@ -6,6 +6,7 @@ import { Component, OnInit, OnChanges } from '@angular/core' //Import component
 import { ProductService } from '../service/app.product.service';
 import { ProductModel } from '../model/app.product.model';
 import { error } from 'selenium-webdriver';
+import {Router} from '@angular/router'
 
 @Component({
     selector: 'product-catalog', // Selector is used on the pages to display what ever is in the template
@@ -25,13 +26,25 @@ import { error } from 'selenium-webdriver';
     <!--Pass the Products to the Dumb Components -->
     <!--Inputs are property bindings and outputs are event binding-->
     <!--<div>Product Item Catalog Component </div>-->
-    
+    <div class="container" *ngIf="!showErrorMessageDiv">
+        <div class="alert alert-success alert-dismissible" *ngIf="errorOrSuccessMessage != null"> 
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{errorOrSuccessMessage}}</strong>
+        </div>    
+    </div>
+    <div class="container" *ngIf="showErrorMessageDiv">
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>{{errorOrSuccessMessage}}</strong>
+        </div>    
+    </div>
     <!--Class 7-->
     <div  class="container">
         <product-list [products] = "products"
-                    (onDetails)="onProductDetails($event)"
+                    (onEditProduct)="onEditProductDetails($event)"
                     (onChangeOfValue) = "handleChangeOfValue($event)"  
-                    (onDelete) = "onDeleteProduct($event)"></product-list>
+                    (onDelete) = "onDeleteProduct($event)"
+                    (onShowProductDetails) = "onProductDetails($event)"></product-list>
     </div>
 
     <div class="container">        
@@ -68,7 +81,10 @@ export class ProductCatalogComponent { // Export the component
     error:String = null;
     selectedProduct:ProductModel;
     showSelectedProductDetails: boolean = false;
-    constructor(private productService: ProductService) {
+    showErrorMessageDiv:boolean = false;
+    errorOrSuccessMessage:String = null;
+    constructor(private productService: ProductService,
+                private router:Router) {
         /*this.products =  this.productService.getProducts();*/
         //Do not write any business logic here
     }
@@ -78,27 +94,13 @@ export class ProductCatalogComponent { // Export the component
         //this.products = this.productService.getProductsOld();
         this.productService.getProducts().subscribe((productArray:ProductModel[]) => {
             this.products = productArray;
+        },
+        (error) => {
+            console.log("Error from the service " ,  error.status,error.url)
         });
-
-        /*
-        this.productService.getProducts().subscribe(function(productArray) {
-            this.products = productArray;
-        });*/
     }
 
     handleChangeOfValue(productHere: ProductModel) {
-       /* this.products = this.products.map(target => {
-            if (productHere.id === target.id) {
-                console.log(productHere.name);
-                console.log(target.name);
-                return Object.assign({}, target, productHere);
-            } else {
-                return target;
-            }
-        })*/
-
-        console.log("In Product catalog Component", productHere);
-
         this.productService.updateProduct(productHere).subscribe((response:ProductModel) => {
             this.products = this.products.map((product:ProductModel) => {
                 if(product.id === productHere.id) {
@@ -107,54 +109,59 @@ export class ProductCatalogComponent { // Export the component
                     return product;
                 }
             });
-        }, (error:any) => this.error = error.statusText)
+        }, 
+        (error) => {
+            console.log("Error from the service " ,  error.status,error.url);
+        });
     }
 
     showNewProductDetails() {
         this.showProductAddDetails = true;
     }
 
+    onProductDetails(product:ProductModel) {
+        this.router.navigate(['products',product.id]);
+    }
+
     onProductAdd(newProduct:ProductModel){
-        console.log("In onProductAdd");
-        //this.products.push(product); -- One way
-        //this.products = [...this.products,product]; // Spread operator ,  this will make the product as immutable
-        //console.log(newProduct);
         this.productService.createProduct(newProduct).subscribe((response:ProductModel) => {
             this.loadProducts();
             this.showProductAddDetails = false; 
+            this.requestSuccess();
+        },
+        (error) => {
+            console.log("Error from the service " ,  error.status,error.url);
+            this.showErrorMessage(error);
         });
             
     }
 
     onDeleteProduct(deletedProduct:ProductModel) {
-        //this.products = this.products.filter(product => product.id != deletedProduct.id);
-
-        /*this.productService.removeProduct(deletedProduct).subscribe((response:ProductModel) => {
-            this.products = this.products.map((product:ProductModel) => {
-                if(product.id === deletedProduct.id){
-                    return null;
-                } else {
-                    return product;
-                }
-            })
-        });*/
-        //alert(deletedProduct);
         this.productService.removeProduct(deletedProduct).subscribe((response:ProductModel) => {
             this.loadProducts();
-        })
+        },
+        (error) => {
+            console.log("Error from the service " ,  error.status,error.url)
+        });
 
     }
 
     loadProducts() {
         this.productService.getProducts().subscribe((productArray:ProductModel[]) => {
             this.products = productArray;
+        },
+        (error) => {
+            console.log("Error from the service " ,  error.status,error.url)
         });
     }
 
-    onProductDetails(product:ProductModel){
+    onEditProductDetails(product:ProductModel) {
         this.productService.fetchAproduct(product.id).subscribe((response:ProductModel) => {
                 this.showSelectedProductDetails = true;
                 this.selectedProduct = response;
+        },
+        (error) => {
+            console.log("Error from the service " ,  error.status,error.url)
         });
     }
 
@@ -167,9 +174,22 @@ export class ProductCatalogComponent { // Export the component
                      return product;
                  }
              });
-         }, (error:any) => this.error = error.statusText);       
+         },
+         (error) => {
+             console.log("Error from the service " ,  error.status,error.url)
+         });     
 
         this.showSelectedProductDetails = false;
-     }
+    }
+
+    showErrorMessage(error:any) {
+        this.showErrorMessageDiv = true;
+        this.errorOrSuccessMessage = "ERROR : " +  error.status + " " + error._body;
+    }
+
+    requestSuccess(){
+        this.showErrorMessageDiv = false;
+        this.errorOrSuccessMessage = "Success!!!!"
+    }
     
 }

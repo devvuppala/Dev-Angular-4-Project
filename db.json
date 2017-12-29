@@ -28,7 +28,25 @@
       "id": 5,
       "name": "Cable",
       "type": "Computer",
-      "premium": false
+      "premium": true
+    },
+    {
+      "id": 7,
+      "name": "satellite",
+      "type": "Electronics",
+      "premium": "true"
+    },
+    {
+      "id": 6,
+      "name": "Rocket",
+      "type": "Electronics",
+      "premium": "true"
+    },
+    {
+      "id": 8,
+      "name": "Robo",
+      "type": "Electronics",
+      "premium": "true"
     }
   ]
 }

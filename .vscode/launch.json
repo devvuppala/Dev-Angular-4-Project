@@ -10,7 +10,7 @@
             "request": "launch",
             "url": "http://localhost:4200",
             "sourceMaps": true,
-            "webRoot": "${workspaceRoot}"
+            "webRoot": ""
         },
         {
             "name": "Attach to Chrome, with sourcemaps",
