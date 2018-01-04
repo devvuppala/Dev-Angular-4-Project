@@ -48,5 +48,17 @@
       "type": "Electronics",
       "premium": "true"
     }
+  ],
+  "productTypes": [
+      {"code":"none","value":"None"},
+      {"code":"games","value":"Games"},
+      {"code":"electronics","value":"Electronics"},
+      {"code":"books","value":"Books"}      
+  ],
+  "users": [
+      {"id":1,"username":"dev1" , "password" : "dev1Pass"},
+      {"id":2,"username":"dev2" , "password" : "dev2Pass"},
+      {"id":3,"username":"dev3" , "password" : "dev3Pass"},
+      {"id":4,"username":"dev4" , "password" : "dev4Pass"}
   ]
 }

@@ -19,6 +19,7 @@ interface Product {
         <ul class="nav navbar-nav">
           <li  routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}"><a routerLink="/">Home</a></li>
           <li  routerLinkActive="active"><a routerLink="/contactus">Contact Us</a></li>
+          <li  routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}"><a routerLink="">logout</a></li>
         </ul>
       </div>
     </nav>
@@ -39,6 +40,7 @@ interface Product {
 export class AppComponent {
   title:string = "Dev's Angular App";
   amount:number;
+  showNavigationBar:boolean = false;
 
   product:any = {
     name:'Outliers',

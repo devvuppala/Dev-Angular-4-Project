@@ -120,7 +120,7 @@ export class ProductCatalogComponent { // Export the component
     }
 
     onProductDetails(product:ProductModel) {
-        this.router.navigate(['products',product.id]);
+        this.router.navigate(['products',product.id],{queryParams:{name:"queryParamValue"}});
     }
 
     onProductAdd(newProduct:ProductModel){

@@ -8,6 +8,8 @@
   import { ProductService } from '../service/app.product.service';
   import {Router,ActivatedRoute,Params} from '@angular/router';
   import 'rxjs/add/operator/switchMap'
+  import 'rxjs/add/observable/combineLatest'
+  import { Observable } from 'rxjs/Observable';
   
   @Component({
       selector:'product-details', // Selector is used on the pages to display what ever is in the template
@@ -54,10 +56,18 @@
                     .subscribe((data:ProductModel) => this.product = data);                                   
             }            
         );*/
-        this.activeRoute.queryParams.subscribe((qparams:Params) => console.log(qparams));
-        this.activeRoute.params.switchMap((params:any) => 
+        // One way to invoke Query Params
+        //this.activeRoute.queryParams.subscribe((qparams:Params) => console.log(qparams));
+        /*this.activeRoute.params.switchMap((params:any) => 
                 this.productService.fetchAproduct(params.id))
-                    .subscribe((data:ProductModel) => this.product = data);
+                    .subscribe((data:ProductModel) => this.product = data);*/
+
+        //Append the Observables
+        Observable.combineLatest(this.activeRoute.params,this.activeRoute.queryParams).
+            subscribe((data:any) => 
+                this.productService.fetchAproduct(data[0].id).subscribe((data:ProductModel) => this.product = data)
+            );
+
     }
 
     
