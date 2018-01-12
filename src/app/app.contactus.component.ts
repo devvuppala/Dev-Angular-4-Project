@@ -6,15 +6,15 @@ import {Router} from '@angular/router';
   styleUrls: ['app.component.scss'],
   template: `
     <div class="container">
-        phone Number : 111-111-1111
-        Email ID : xyz@gmail.com
+        contact @{{companyname}} . Copyrights reserved.
     </div>
+    
   `
 })
 
 
 export class ContactUsComponent {
-
+  companyname:string = 'Dev';
     
 
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild , AfterContentInit , AfterViewInit , ViewChildren , QueryList , ChangeDetectorRef} from '@angular/core';
+import {ContactUsComponent} from './app.contactus.component'
 
 interface Product {
     name:string;
@@ -31,39 +32,47 @@ interface Product {
     <div class="container">
       <router-outlet></router-outlet>
     </div>
+    <div class="container">
+      <app-contactus></app-contactus>
+      <!--<app-contactus></app-contactus>
+      <app-contactus></app-contactus>-->
+    </div>
+    
     <!--<app-login></app-login>-->
     <!--<product-catalog></product-catalog>-->
   `
 })
 
 
-export class AppComponent {
+export class AppComponent  implements AfterContentInit , AfterViewInit{
   title:string = "Dev's Angular App";
   amount:number;
   showNavigationBar:boolean = false;
 
-  product:any = {
-    name:'Outliers',
-    type:'Books',
-    premium:true
+  @ViewChild(ContactUsComponent) contactUs : ContactUsComponent;
+  @ViewChildren(ContactUsComponent) contactUsComps : QueryList<ContactUsComponent>;
+  constructor(private _cd:ChangeDetectorRef) {
+
   }
 
-  products:Product[] = [{
-    name:'Outliers',
-    type:'Books',
-    premium:true
-  } , {
-    name:'Math',
-    type:'Books',
-    premium:true
-  } , {
-    name:'Carrom',
-    type:'Books',
-    premium:false
-  } , {
-    name:'One More',
-    type:'Books',
-    premium:true
-  }]
+  ngAfterContentInit() {
+
+  }
+
+  ngAfterViewInit() { 
+   /* console.log(this.contactUs);
+    setTimeout(() => {      
+      this.contactUsComps.forEach((contactusItem : ContactUsComponent) => {
+        contactusItem.companyname = "New Company in Array Name";
+      })
+    })*/
+    this.contactUsComps.forEach((contactusItem : ContactUsComponent) => {
+      contactusItem.companyname = "New Company in Array Name";
+    })
+    //Invoke the change detetection
+    this._cd.detectChanges();
+  }
+
+
 
 }
