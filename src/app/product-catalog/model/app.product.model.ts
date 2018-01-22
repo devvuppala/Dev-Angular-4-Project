@@ -3,4 +3,5 @@ export interface ProductModel {
     name:string;
     type:string;
     premium:boolean;
+    price?:number;
 }

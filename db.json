@@ -4,61 +4,139 @@
       "id": 3,
       "name": "Mac book pro",
       "type": "Computers",
-      "premium": "true"
+      "premium": "true",
+      "price": 1000
     },
     {
       "id": 1,
       "name": "Monitor (Samsung)",
       "type": "Computer",
-      "premium": "true"
+      "premium": "true",
+      "price": 2000
     },
     {
       "id": 2,
       "name": "CPU",
       "type": "Computers",
-      "premium": "true"
+      "premium": "true",
+      "price": 3000
     },
     {
       "id": 4,
       "name": "Hard disk",
       "type": "Computers",
-      "premium": "true"
+      "premium": "true",
+      "price": 4000
     },
     {
       "id": 5,
       "name": "Cable",
       "type": "Computer",
-      "premium": true
+      "premium": true,
+      "price": 5000
     },
     {
       "id": 7,
       "name": "satellite",
       "type": "Electronics",
-      "premium": "true"
+      "premium": "true",
+      "price": 9000
     },
     {
       "id": 6,
       "name": "Rocket",
       "type": "Electronics",
-      "premium": "true"
+      "premium": "true",
+      "price": 5000
     },
     {
       "id": 8,
       "name": "Robo",
       "type": "Electronics",
-      "premium": "true"
+      "premium": "true",
+      "price": 9000
     }
   ],
   "productTypes": [
-      {"code":"none","value":"None"},
-      {"code":"games","value":"Games"},
-      {"code":"electronics","value":"Electronics"},
-      {"code":"books","value":"Books"}      
+    {
+      "code": "none",
+      "value": "None"
+    },
+    {
+      "code": "games",
+      "value": "Games"
+    },
+    {
+      "code": "electronics",
+      "value": "Electronics"
+    },
+    {
+      "code": "books",
+      "value": "Books"
+    }
   ],
   "users": [
-      {"id":1,"username":"dev1" , "password" : "dev1Pass"},
-      {"id":2,"username":"dev2" , "password" : "dev2Pass"},
-      {"id":3,"username":"dev3" , "password" : "dev3Pass"},
-      {"id":4,"username":"dev4" , "password" : "dev4Pass"}
+    {
+      "id": 1,
+      "username": "dev1",
+      "password": "dev1Pass"
+    },
+    {
+      "id": 2,
+      "username": "dev2",
+      "password": "dev2Pass"
+    },
+    {
+      "id": 3,
+      "username": "dev3",
+      "password": "dev3Pass"
+    },
+    {
+      "id": 4,
+      "username": "dev4",
+      "password": "dev4Pass"
+    }
+  ],
+  "technologies": [
+    {
+      "id": 1,
+      "techName": "Java",
+      "techDuration": 5,
+      "techCost": 120000,
+      "techOnlineTraining": true,
+      "techstartDate": "2018-01-19"
+    },
+    {
+      "id": 2,
+      "techName": "Microstrategy",
+      "techDuration": 3,
+      "techCost": 140000,
+      "techOnlineTraining": true,
+      "techstartDate": "2018-01-14"
+    },
+    {
+      "id": 3,
+      "techName": "Angular+Bootstap+SpringBoot+Microservices",
+      "techDuration": 3,
+      "techCost": 160000,
+      "techOnlineTraining": true,
+      "techstartDate": "2018-01-15"
+    },
+    {
+      "id": 4,
+      "techName": "R",
+      "techDuration": 1,
+      "techCost": 10000,
+      "techOnlineTraining": false,
+      "techstartDate": "2018-01-16"
+    }
+  ],
+  "technologiesCart": [
+    {
+      "id": 1,
+      "techName": "Java",
+      "techCost": 120000,
+      "techstartDate": "2018-01-19"
+    }
   ]
 }

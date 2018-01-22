@@ -1,4 +1,4 @@
-import { Component,ViewChild,ElementRef, AfterContentInit , AfterViewInit, ComponentFactoryResolver , ViewContainerRef } from '@angular/core';
+import { Component,ViewChild,ElementRef, AfterContentInit , AfterViewInit, ComponentFactoryResolver , ViewContainerRef, ComponentRef } from '@angular/core';
 import {Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router/src/router_state';
 import {UserService} from '../service/app.user.service'
@@ -11,8 +11,55 @@ import { MessageComponent } from '../component/app.message.component'
 @Component({
   selector: 'app-login',
   //templateUrl: './app.component.html',
-  //styleUrls: ['./app.component.scss'],
+  styleUrls: ['../css/app.login.scss'],
   template: `
+    <div class="container">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-lock"></span> Login</div>
+                <div class="panel-body">
+                    <form name="form" class="form-horizontal" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" novalidate>
+                    
+                    <div class="form-group">
+                        <label for="username" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+                            <div *ngIf="loginForm.submitted && !username.valid" class="help-block">Username is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-3 control-label"> Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+                            <div *ngIf="loginForm.submitted && !password.valid" class="help-block">Password is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label><input type="checkbox"/> Remember me</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group last">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button [disabled]="loading" class="btn btn-primary">Sign in</button>
+                            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            
+                            <button type="reset"  class="btn btn-warning">Reset</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    Not Registred? <a href="www.google.com">Register here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     <!--<div class="container">
         <h3> Login </h3>
         <div class="form-group">
@@ -37,8 +84,8 @@ import { MessageComponent } from '../component/app.message.component'
         <button type="submit">Submit</button> 
     </form>-->
     
-    <div class="col-md-6 col-md-offset-3">
-        <!--<h2>Login</h2>-->
+    <!--<div class="col-md-6 col-md-offset-3">
+        <h2>Login</h2>
         <ng-content select=".heading"></ng-content>
         <div *ngIf="showErrorMessage"> 
         <div class="alert alert-danger">
@@ -59,18 +106,21 @@ import { MessageComponent } from '../component/app.message.component'
             <div class="form-group">
                 <button [disabled]="loading" class="btn btn-primary">Login</button>
                 <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-               <!-- <a [routerLink]="['/register']" class="btn btn-link">Register</a> -->
-            </div>
+               <!-- <a [routerLink]="['/register']" class="btn btn-link">Register</a> 
+            </div>-->
 
            <!--<div class="form-group">
              <input type="text" class="form-control" name="htmlComponentExample" #htmlComponentRef placeholder="Enter an email ID"/>
             </div> -->
 
             
-        </form>
-        <app-message></app-message>
-        <div #messageComponentRef></div>
-    </div>
+        <!--</form>-->
+        
+     <!--</div>-->
+
+    <!-- Dynamic templates and Components -->
+    <!--<div #messageComponentRef></div>  -->  
+    <!--<button (click) = "destroyMessage()" type="button" class="btn btn-success"> Destroy Message </button>-->
   `
 })
 
@@ -82,6 +132,7 @@ export class LoginComponent implements AfterContentInit , AfterViewInit{
     showErrorMessage:boolean = false;
     cookieValue = 'UNKNOWN';
     cookieName:string = "attESSec";
+    messageComponentRef: ComponentRef<MessageComponent>;
     
     //Imperative Routing
     constructor(private router:Router,
@@ -108,13 +159,17 @@ export class LoginComponent implements AfterContentInit , AfterViewInit{
         dummyHtmlRefElement.focus();*/
 
         //Create a new dynamic component Factory
-        const messageComponentFactory = this.componentFactoryResolver.resolveComponentFactory(MessageComponent);
+        //const messageComponentFactory = this.componentFactoryResolver.resolveComponentFactory(MessageComponent);
         //Create a new component
-        const messgaeComponentRef = this.messageComponentContainerReference.createComponent(messageComponentFactory);
+        //this.messageComponentRef = this.messageComponentContainerReference.createComponent(messageComponentFactory);
         //Get hold of elements of the component
-        messgaeComponentRef.instance.userName = "Dev Vuppala"
+        //this.messageComponentRef.instance.userName = "Dev Vuppala"
+        
     }
 
+    destroyMessage() {
+        this.messageComponentRef.destroy();
+    }
     ngAfterViewInit() {
 
     }

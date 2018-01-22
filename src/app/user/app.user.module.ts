@@ -19,7 +19,7 @@ const productRoutes:Routes = [
                           
 @NgModule({
     imports:[CommonModule,FormsModule,RouterModule.forChild(productRoutes)],
-    declarations:[LoginComponent],  // Module should declare the smart component
+    declarations:[LoginComponent,MessageComponent],  // Module should declare the smart component
     entryComponents:[MessageComponent], // Dynamic components    
     providers:[UserService],   // This can be used in any other files in this module
     exports:[LoginComponent]      // Module should export the component (Only the smart component) , 
