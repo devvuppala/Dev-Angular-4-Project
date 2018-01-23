@@ -58,6 +58,11 @@ export class TechnologyService {
                       .map((response:Response) => response.json());
     }
 
+    testTheRestService() : Observable<string> {
+      return  this.http.get(`http://localhost:8080/welcome`).map((response:Response) => 
+                             response.json());
+    }
+
     //Get , POST, PUT , DELETE
     /*updateProduct(product:ProductModel): Observable<ProductModel> {
      /* let cpHeaders = new Headers({

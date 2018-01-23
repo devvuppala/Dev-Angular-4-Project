@@ -129,6 +129,14 @@
       "techCost": 10000,
       "techOnlineTraining": false,
       "techstartDate": "2018-01-16"
+    },
+    {
+      "id": 5,
+      "techName": "4324",
+      "techDuration": 324,
+      "techCost": 999,
+      "techOnlineTraining": true,
+      "techstartDate": "2018-01-18"
     }
   ],
   "technologiesCart": [
