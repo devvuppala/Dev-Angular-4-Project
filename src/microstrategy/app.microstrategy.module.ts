@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms'
 import {HttpModule} from '@angular/http'
 import {RouterModule,Routes} from '@angular/router'
 import {ReactiveFormsModule} from '@angular/forms' // This is used to import the Reactive form functionalit
-import {TECH_API_TOKEN, TECH_CART_API_TOKEN} from '../app.properties'
+import {TECH_API_TOKEN, TECH_CART_API_TOKEN} from '../app/app.properties'
 import {MicrostategyContainerComponent} from './container/app.microstrategy.container'
 
 const productRoutes:Routes = [

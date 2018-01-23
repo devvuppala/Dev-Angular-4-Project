@@ -77,7 +77,7 @@ interface Product {
     <div class="footer-bottom">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="copyright-outlet-buffer">
           <!--Footer Bottom-->
           <p class="text-xs-center">&copy; Copyright 2018 - RANFT RR Team.  All rights reserved.</p>
         </div>

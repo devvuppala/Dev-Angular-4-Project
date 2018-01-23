@@ -5,7 +5,7 @@ import {UserService} from '../service/app.user.service'
 import { UserModel } from '../model/app.user.model';
 import {CookieService} from 'ngx-cookie-service';
 import { NgXCookies } from 'ngx-cookies';
-import { ContactUsComponent } from '../../app.contactus.component';
+import { ContactUsComponent } from '../../app/app.contactus.component';
 import { MessageComponent } from '../component/app.message.component'
 
 @Component({
@@ -13,15 +13,19 @@ import { MessageComponent } from '../component/app.message.component'
   //templateUrl: './app.component.html',
   styleUrls: ['../css/app.login.scss'],
   template: `
-    <div class="container">
     <div class="row">
-        <div class="col-md-5 col-md-offset-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-lock"></span> Login</div>
-                <div class="panel-body">
-                    <form name="form" class="form-horizontal" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" novalidate>
-                    
+        <div class="col-md-6 offset-md-3">
+            <div class="card card-outline-secondary">
+                <div class="card-header">
+                    <h3 class="mb-0">Login</h3>
+                </div>
+                <div *ngIf="showErrorMessage"> 
+                    <div class="alert alert-danger">
+                        <strong>Invalid user name or Password.</strong>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <form name="form" class="form" (ngSubmit)="loginForm.form.valid && login()" #loginForm="ngForm" novalidate>                    
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Email</label>
                         <div class="col-sm-9">
@@ -45,7 +49,7 @@ import { MessageComponent } from '../component/app.message.component'
                     </div>
                     <div class="form-group last">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <button [disabled]="loading" class="btn btn-primary">Sign in</button>
+                            <button [disabled]="loading" class="btn btn-primary">Login</button>
                             <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                             
                             <button type="reset"  class="btn btn-warning">Reset</button>
@@ -53,12 +57,11 @@ import { MessageComponent } from '../component/app.message.component'
                     </div>
                     </form>
                 </div>
-                <div class="panel-footer">
+                <!--<div class="panel-footer">
                     Not Registred? <a href="www.google.com">Register here</a>
-                </div>
+                </div>-->
             </div>
         </div>
-    </div>
     </div>
     <!--<div class="container">
         <h3> Login </h3>

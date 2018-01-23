@@ -4,7 +4,7 @@ import {Http,Response, RequestOptions,Headers} from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
-import {TECH_API_TOKEN, TECH_CART_API_TOKEN , JSON_SERVER_URL} from '../../app.properties'
+import {TECH_API_TOKEN, TECH_CART_API_TOKEN , JSON_SERVER_URL} from '../../app/app.properties'
 
 
 

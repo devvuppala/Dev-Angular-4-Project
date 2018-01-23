@@ -9,7 +9,7 @@ import {TechnologyFormComponent} from './component/app.technology.component'
 import {TechnologyAddComponent} from './component/app.technology.add'
 import {TechnologyService} from './service/app.technology.service'
 import {TechnologyCartFormComponent} from './component/app.technology.cart.component'
-import {TECH_API_TOKEN, TECH_CART_API_TOKEN} from '../app.properties'
+import {TECH_API_TOKEN, TECH_CART_API_TOKEN} from '../app/app.properties'
 
 const productRoutes:Routes = [
                         {path:'technology',

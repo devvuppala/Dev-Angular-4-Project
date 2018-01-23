@@ -19,20 +19,20 @@ import {EffectsModule} from '@ngrx/effects'
 import {RouterModule,Routes} from '@angular/router'
 
 //App specific Modules
-import {UserModule} from './user/app.user.module';
-import {ProductCatalogModule} from './product-catalog/app.product.catalog.module' // Import the Module
-import {TechnologyCatalogModule} from './technology-catalog/app.technology.module'
-import {GridModule} from './Grid-Module/app.gridmodule.module'
-import {MicrostategyModule} from './microstrategy/app.microstrategy.module'
+import {UserModule} from '../user/app.user.module';
+import {ProductCatalogModule} from '../product-catalog/app.product.catalog.module' // Import the Module
+import {TechnologyCatalogModule} from '../technology-catalog/app.technology.module'
+import {GridModule} from '../Grid-Module/app.gridmodule.module'
+import {MicrostategyModule} from '../microstrategy/app.microstrategy.module'
 import {RemindersModule} from '../reminders/app.reminder.module'
 
 //App specific Components
 import {ErrorComponent} from './app.error.component';
 import {ContactUsComponent} from './app.contactus.component'
-import {LoginComponent} from './user/container/app.login.component'
+import {LoginComponent} from '../user/container/app.login.component'
 import {AppComponent} from './app.component';
-import { UserService } from './user/service/app.user.service';
-import { MessageComponent } from './user/component/app.message.component';
+import { UserService } from '../user/service/app.user.service';
+import { MessageComponent } from '../user/component/app.message.component';
 import {JSON_SERVER_URL} from './app.properties'
 
 const environment = {
