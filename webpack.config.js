@@ -932,6 +932,29 @@ module.exports = {
     "setImmediate": false
   },
   "devServer": {
-    "historyApiFallback": true
+    "historyApiFallback": true,
+    proxy: {
+      "/json_server": {
+        "target": "http://localhost:3000",
+        "secure": false ,
+        "pathRewrite": {"^/json_server" : ""}
+      },
+      "/springBoot_rest_service": {
+        "target": "http://localhost:8080",
+        "secure": false ,
+        "pathRewrite": {"^/springBoot_rest_service" : ""}
+       },
+       "/another_rest_service": {
+         "target": "",
+         "secure": false ,
+         "pathRewrite": {"^/another_rest_service" : ""}
+        },
+        "/weather_service_free": {
+          "target": "http://openweathermap.org",
+          "secure": false ,
+          "pathRewrite": {"^/weather_service_free" : ""}
+         }
+    
+    }
   }
 };

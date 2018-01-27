@@ -10,13 +10,13 @@ import {FormGroup , FormControl , FormArray} from '@angular/forms' // Import for
                 <div class="form-group row">
                 
                     <div class="col-sm-1">
-                        <label for="techNameLabel" class="col-sm-1 col-form-label">ID:</label>
+                        <label for="techIDLabel" class="col-sm-1 col-form-label">ID:</label>
                         <input type="number" class="form-control" formControlName="id" id="id" placeholder="Enter ID"  required>
                         <div class="text-danger" *ngIf="checkRequired('id')">ID is Required</div>
                     </div>
                     <div class="col-sm-2">
                         <label for="techNameLabel" class="col-sm-1 col-form-label">Name:</label>
-                        <input type="text" class="form-control is-invalid" formControlName="techName" id="techName" placeholder="Enter Technology Name" required>
+                        <input type="text" class="form-control " formControlName="techName" id="techName" placeholder="Enter Technology Name" required>
                         <div class="text-danger" *ngIf="checkRequired('techName')">Tech Name is Required</div>
                     </div>
                     

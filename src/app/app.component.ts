@@ -24,7 +24,7 @@ interface Product {
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active"   routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">
+        <li class="nav-item "   routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
         <!--<li class="nav-item">
@@ -56,6 +56,9 @@ interface Product {
         <li   class="nav-item "  routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">
           <a class="nav-link" routerLink="/reminders">Reminders - Ngrx Store</a>
         </li>
+        <li   class="nav-item "  routerLinkActive="active" >
+          <a class="nav-link" routerLink="/charts_and_maps_am/chart_am">Charts & maps</a>
+        </li>
       </ul>
       <form class="form-inline my-2 my-lg-0"> 
         <ul class="navbar-nav mr-auto">
@@ -79,7 +82,7 @@ interface Product {
       <div class="row">
         <div class="copyright-outlet-buffer">
           <!--Footer Bottom-->
-          <p class="text-xs-center">&copy; Copyright 2018 - RANFT RR Team.  All rights reserved.</p>
+          <p class="text-xs-center">&copy; Copyright 2018   All rights reserved.</p>
         </div>
       </div>
     </div>

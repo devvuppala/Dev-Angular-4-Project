@@ -19,7 +19,8 @@ const productRoutes:Routes = [
 
                           
 @NgModule({
-    imports:[CommonModule,FormsModule,RouterModule.forChild(productRoutes),ReactiveFormsModule],
+    imports:[CommonModule,FormsModule,RouterModule.forChild(productRoutes),ReactiveFormsModule,
+                    ], // 
     declarations:[RemindersComponent],  // Module should declare the smart component
     providers:[],   // This can be used in any other files in this module
     exports:[RemindersComponent]      // Module should export the component (Only the smart component) , 

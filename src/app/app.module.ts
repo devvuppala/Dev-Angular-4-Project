@@ -25,6 +25,10 @@ import {TechnologyCatalogModule} from '../technology-catalog/app.technology.modu
 import {GridModule} from '../Grid-Module/app.gridmodule.module'
 import {MicrostategyModule} from '../microstrategy/app.microstrategy.module'
 import {RemindersModule} from '../reminders/app.reminder.module'
+import {ChartsModule} from '../charts/app.chart.module'
+
+//Charts
+import { AmChartsModule } from "@amcharts/amcharts3-angular"; // am Charts
 
 //App specific Components
 import {ErrorComponent} from './app.error.component';
@@ -33,7 +37,7 @@ import {LoginComponent} from '../user/container/app.login.component'
 import {AppComponent} from './app.component';
 import { UserService } from '../user/service/app.user.service';
 import { MessageComponent } from '../user/component/app.message.component';
-import {JSON_SERVER_URL} from './app.properties'
+import {JSON_SERVER_URL,SPRING_BOOT_REST_SERVICE_URL,MOB_REST_SERVICE_URL,WEATHER_SERVICE_FREE} from './app.properties'
 
 const environment = {
   developement: true,
@@ -73,9 +77,16 @@ const routes:Routes = [
     TechnologyCatalogModule,
     GridModule,
     MicrostategyModule,
-    RemindersModule    // Add it to the imports
+    RemindersModule,
+    ChartsModule ,    
+    AmChartsModule   // Add it to the imports
   ],
-  providers: [UserService,CookieService,{provide:JSON_SERVER_URL , useValue:'http://localhost:3000'}],
+  providers: [UserService,CookieService,
+              {provide:JSON_SERVER_URL , useValue:'json_server'}, // Json Server api
+              {provide:SPRING_BOOT_REST_SERVICE_URL , useValue:'springBoot_rest_service'},
+              {provide:MOB_REST_SERVICE_URL , useValue:'another_rest_service'},
+              {provide:WEATHER_SERVICE_FREE , useValue:'weather_service_free'} // Spring Boot rest service api
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -116,6 +116,10 @@
         this.techService.testTheRestService().subscribe((data:string) => {
             console.log("Data from Rest service : " , data);
         })
+
+        this.techService.testTheMobService().subscribe((data:string) => {
+            console.log("Data from Mobility service : " , data);
+        })
         //listen to the changes made to the technology items
         //this.techologiesFromService.valueChanges.subscribe(changes => console.log(changes));
         this.techologiesFromService.get('technologyItems').valueChanges.subscribe(changes => this.calculateTotalTech(changes));

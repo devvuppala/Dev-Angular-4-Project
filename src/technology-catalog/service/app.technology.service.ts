@@ -4,7 +4,7 @@ import {Http,Response, RequestOptions,Headers} from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
-import {TECH_API_TOKEN, TECH_CART_API_TOKEN , JSON_SERVER_URL} from '../../app/app.properties'
+import {TECH_API_TOKEN, TECH_CART_API_TOKEN , JSON_SERVER_URL , SPRING_BOOT_REST_SERVICE_URL , MOB_REST_SERVICE_URL,WEATHER_SERVICE_FREE} from '../../app/app.properties'
 
 
 
@@ -14,12 +14,19 @@ export class TechnologyService {
     constructor(private http:Http,
                 @Inject(TECH_API_TOKEN) private techApi:string,
                 @Inject(TECH_CART_API_TOKEN) private techCartApi:string,
-                @Inject(JSON_SERVER_URL) private jsonServerApi:string) {
+                @Inject(JSON_SERVER_URL) private jsonServerApi:string,
+                @Inject(SPRING_BOOT_REST_SERVICE_URL) private springBootServerApi:string,
+                @Inject(MOB_REST_SERVICE_URL) private mobServerApi:string,
+                @Inject(WEATHER_SERVICE_FREE) private freeWeatherService:string) {
                   
     }
 
     TECH_API:string = this.jsonServerApi + this.techApi;
     TECH_CART_API:string =  this.jsonServerApi + this.techCartApi;
+
+    SPRING_BOOT_API = this.springBootServerApi;
+    MOB_SERVICE_API = this.mobServerApi;
+    WEA_SERVICE_API = this.freeWeatherService;
 
     //private products_url:string = 'assests/assets/product.json';
 
@@ -59,48 +66,13 @@ export class TechnologyService {
     }
 
     testTheRestService() : Observable<string> {
-      return  this.http.get(`http://localhost:8080/welcome`).map((response:Response) => 
+      return  this.http.get(`${this.SPRING_BOOT_API}/students/Student1/courses`).map((response:Response) => 
+                             response.json());
+    }
+    
+    testTheMobService() : Observable<string> {
+      return  this.http.get(`${this.WEA_SERVICE_API}/data/2.5/forecast?zip=94040&appid=b6907d289e10d714a6e88b30761fae22`).map((response:Response) => 
                              response.json());
     }
 
-    //Get , POST, PUT , DELETE
-    /*updateProduct(product:ProductModel): Observable<ProductModel> {
-     /* let cpHeaders = new Headers({
-        "Authorization":"xyz-13245",
-        "Accept":"application/json"
-      });
-      let options = new RequestOptions({headers : cpHeaders});
-      
-      return this.http.put(`${PRODUCT_API}/${product.id}`,product,options)
-                .map((response:Response) => response.json());*/
-      
-      /*return this.http.put(`${PRODUCT_API}/${product.id}`,product)
-                .map((response:Response) => response.json());
-    }
-
-    createProduct(product): Observable<ProductModel>{
- 
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
-   
-      return this.http.post(`${PRODUCT_API}`,product,options
-      ).map(res => res.json());
-    }
-
-
-    removeProduct(product:ProductModel): Observable<ProductModel> {
-      return this.http.delete(`${PRODUCT_API}/${product.id}`)
-                      .map((response:Response) => response.json());
-    }
-
-
-    fetchAproduct(id:number): Observable<ProductModel> {
-      return this.http.get(`${PRODUCT_API}/${id}`)
-                      .map((response:Response) => response.json()).catch(error => Observable.throw(error.json))
-    }
-
-    fetchProductTypes(id:number): Observable<ProductModel> {
-      return this.http.get(`${PRODUCT_API}/${id}`)
-                      .map((response:Response) => response.json()).catch(error => Observable.throw(error.json))
-    }*/
 }
