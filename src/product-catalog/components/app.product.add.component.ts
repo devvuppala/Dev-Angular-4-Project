@@ -20,6 +20,25 @@
         </select>
         <button (click) = "addProduct()" class="btn btn-success">+</button>
       </div> 
+
+      <form class="form-inline" role="form">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" class="form-control" id="fname">
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" class="form-control" id="lname">
+          </div>
+           <div class="form-group">
+            <label for="age">Age</label>
+            <input type="text" class="form-control" id="age">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox"> Remember me</label>
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
   
       `
   

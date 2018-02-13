@@ -10,7 +10,7 @@
       selector:'bar-chart-component', // Selector is used on the pages to display what ever is in the template
       template: `
         <div>
-            <div id="barChartdiv" [style.width.%]="100" [style.height.px]="500"></div>
+            <div id="barChartdiv" [style.width.%]="100" [style.height.px]="700"></div>
         </div>
   
       `
@@ -25,90 +25,229 @@
     }
 
     ngAfterViewInit() {
-        this.chart = this.AmCharts.makeChart("barChartdiv", {
+          this.chart = this.AmCharts.makeChart("barChartdiv", {
             "type": "serial",
             "theme": "light",
-            "marginRight": 70,
+            "legend": {
+                "equalWidths": false,
+                "useGraphSettings": true,
+                "valueAlign": "left",
+                "valueWidth": 120
+            },
             "dataProvider": [{
-              "country": "USA",
-              "visits": 3025,
-              "color": "#FF0F00"
+                "date": "2012-01-01",
+                "distance": 227,
+                "townName": "New York",
+                "townName2": "New York",
+                "townSize": 25,
+                "latitude": 40.71,
+                "duration": 408
             }, {
-              "country": "China",
-              "visits": 1882,
-              "color": "#FF6600"
+                "date": "2012-01-02",
+                "distance": 371,
+                "townName": "Washington",
+                "townSize": 14,
+                "latitude": 38.89,
+                "duration": 482
             }, {
-              "country": "Japan",
-              "visits": 1809,
-              "color": "#FF9E01"
+                "date": "2012-01-03",
+                "distance": 433,
+                "townName": "Wilmington",
+                "townSize": 6,
+                "latitude": 34.22,
+                "duration": 562
             }, {
-              "country": "Germany",
-              "visits": 1322,
-              "color": "#FCD202"
+                "date": "2012-01-04",
+                "distance": 345,
+                "townName": "Jacksonville",
+                "townSize": 7,
+                "latitude": 30.35,
+                "duration": 379
             }, {
-              "country": "UK",
-              "visits": 1122,
-              "color": "#F8FF01"
+                "date": "2012-01-05",
+                "distance": 480,
+                "townName": "Miami",
+                "townName2": "Miami",
+                "townSize": 10,
+                "latitude": 25.83,
+                "duration": 501
             }, {
-              "country": "France",
-              "visits": 1114,
-              "color": "#B0DE09"
+                "date": "2012-01-06",
+                "distance": 386,
+                "townName": "Tallahassee",
+                "townSize": 7,
+                "latitude": 30.46,
+                "duration": 443
             }, {
-              "country": "India",
-              "visits": 984,
-              "color": "#04D215"
+                "date": "2012-01-07",
+                "distance": 348,
+                "townName": "New Orleans",
+                "townSize": 10,
+                "latitude": 29.94,
+                "duration": 405
             }, {
-              "country": "Spain",
-              "visits": 711,
-              "color": "#0D8ECF"
+                "date": "2012-01-08",
+                "distance": 238,
+                "townName": "Houston",
+                "townName2": "Houston",
+                "townSize": 16,
+                "latitude": 29.76,
+                "duration": 309
             }, {
-              "country": "Netherlands",
-              "visits": 665,
-              "color": "#0D52D1"
+                "date": "2012-01-09",
+                "distance": 218,
+                "townName": "Dalas",
+                "townSize": 17,
+                "latitude": 32.8,
+                "duration": 287
             }, {
-              "country": "Russia",
-              "visits": 580,
-              "color": "#2A0CD0"
+                "date": "2012-01-10",
+                "distance": 349,
+                "townName": "Oklahoma City",
+                "townSize": 11,
+                "latitude": 35.49,
+                "duration": 485
             }, {
-              "country": "South Korea",
-              "visits": 443,
-              "color": "#8A0CCF"
+                "date": "2012-01-11",
+                "distance": 603,
+                "townName": "Kansas City",
+                "townSize": 10,
+                "latitude": 39.1,
+                "duration": 890
             }, {
-              "country": "Canada",
-              "visits": 441,
-              "color": "#CD0D74"
+                "date": "2012-01-12",
+                "distance": 534,
+                "townName": "Denver",
+                "townName2": "Denver",
+                "townSize": 18,
+                "latitude": 39.74,
+                "duration": 810
+            }, {
+                "date": "2012-01-13",
+                "townName": "Salt Lake City",
+                "townSize": 12,
+                "distance": 425,
+                "duration": 670,
+                "latitude": 40.75,
+                "dashLength": 8,
+                "alpha": 0.4
+            }, {
+                "date": "2012-01-14",
+                "latitude": 36.1,
+                "duration": 470,
+                "townName": "Las Vegas",
+                "townName2": "Las Vegas"
+            }, {
+                "date": "2012-01-15"
+            }, {
+                "date": "2012-01-16"
+            }, {
+                "date": "2012-01-17"
+            }, {
+                "date": "2012-01-18"
+            }, {
+                "date": "2012-01-19"
             }],
             "valueAxes": [{
-              "axisAlpha": 0,
-              "position": "left",
-              "title": "Visitors from country"
+                "id": "distanceAxis",
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "position": "left",
+                "title": "distance"
+            }, {
+                "id": "latitudeAxis",
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "labelsEnabled": false,
+                "position": "right"
+            }, {
+                "id": "durationAxis",
+                "duration": "mm",
+                "durationUnits": {
+                    "hh": "h ",
+                    "mm": "min"
+                },
+                "axisAlpha": 0,
+                "gridAlpha": 0,
+                "inside": true,
+                "position": "right",
+                "title": "duration"
             }],
-            "startDuration": 1,
             "graphs": [{
-              "balloonText": "<b>[[category]]: [[value]]</b>",
-              "fillColorsField": "color",
-              "fillAlphas": 0.9,
-              "lineAlpha": 0.2,
-              "type": "column",
-              "valueField": "visits"
+                "alphaField": "alpha",
+                "balloonText": "[[value]] miles",
+                "dashLengthField": "dashLength",
+                "fillAlphas": 0.7,
+                "legendPeriodValueText": "total: [[value.sum]] mi",
+                "legendValueText": "[[value]] mi",
+                "title": "distance",
+                "type": "column",
+                "valueField": "distance",
+                "valueAxis": "distanceAxis"
+            }, {
+                "balloonText": "latitude:[[value]]",
+                "bullet": "round",
+                "bulletBorderAlpha": 1,
+                "useLineColorForBulletBorder": true,
+                "bulletColor": "#FFFFFF",
+                "bulletSizeField": "townSize",
+                "dashLengthField": "dashLength",
+                "descriptionField": "townName",
+                "labelPosition": "right",
+                "labelText": "[[townName2]]",
+                "legendValueText": "[[value]]/[[description]]",
+                "title": "latitude/city",
+                "fillAlphas": 0,
+                "valueField": "latitude",
+                "valueAxis": "latitudeAxis"
+            }, {
+                "bullet": "square",
+                "bulletBorderAlpha": 1,
+                "bulletBorderThickness": 1,
+                "dashLengthField": "dashLength",
+                "legendValueText": "[[value]]",
+                "title": "duration",
+                "fillAlphas": 0,
+                "valueField": "duration",
+                "valueAxis": "durationAxis"
             }],
             "chartCursor": {
-              "categoryBalloonEnabled": false,
-              "cursorAlpha": 0,
-              "zoomable": false
+                "categoryBalloonDateFormat": "DD",
+                "cursorAlpha": 0.1,
+                "cursorColor":"#000000",
+                 "fullWidth":true,
+                "valueBalloonsEnabled": false,
+                "zoomable": false
             },
-            "categoryField": "country",
+            "dataDateFormat": "YYYY-MM-DD",
+            "categoryField": "date",
             "categoryAxis": {
-              "gridPosition": "start",
-              "labelRotation": 45
+                "dateFormats": [{
+                    "period": "DD",
+                    "format": "DD"
+                }, {
+                    "period": "WW",
+                    "format": "MMM DD"
+                }, {
+                    "period": "MM",
+                    "format": "MMM"
+                }, {
+                    "period": "YYYY",
+                    "format": "YYYY"
+                }],
+                "parseDates": true,
+                "autoGridCount": false,
+                "axisColor": "#555555",
+                "gridAlpha": 0.1,
+                "gridColor": "#FFFFFF",
+                "gridCount": 50
             },
             "export": {
               "enabled": true
-            }
-          
-          });
+             }
     
-    }
+    });
+  }
 
     ngOnDestroy() {
         if (this.chart) {

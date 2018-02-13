@@ -137,6 +137,14 @@
       "techCost": 999,
       "techOnlineTraining": true,
       "techstartDate": "2018-01-18"
+    },
+    {
+      "id": 9,
+      "techName": "ertert",
+      "techDuration": 5,
+      "techCost": 999,
+      "techOnlineTraining": null,
+      "techstartDate": "2018-02-05"
     }
   ],
   "technologiesCart": [
