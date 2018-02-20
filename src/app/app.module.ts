@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
-import { NgXCookies } from 'ngx-cookies';
+//import { CookieService } from 'ngx-cookie-service';
+//import { NgXCookies } from 'ngx-cookies';
 
 //Http Modules
 import {HttpModule} from '@angular/http'
@@ -81,7 +81,7 @@ const routes:Routes = [
     ChartsModule ,    
     AmChartsModule   // Add it to the imports
   ],
-  providers: [UserService,CookieService,
+  providers: [UserService,//CookieService,
               {provide:JSON_SERVER_URL , useValue:'json_server'}, // Json Server api
               {provide:SPRING_BOOT_REST_SERVICE_URL , useValue:'springBoot_rest_service'},
               {provide:MOB_REST_SERVICE_URL , useValue:'another_rest_service'},

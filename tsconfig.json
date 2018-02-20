@@ -17,7 +17,7 @@
     ]
   },
   "include": [
-    "src/**/*",
-    "node_modules/ngx-cookies/index.ts"
+    "src/**/*"//,
+    //"node_modules/ngx-cookies/index.ts"
   ]
 }

@@ -3,8 +3,8 @@ import {Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router/src/router_state';
 import {UserService} from '../service/app.user.service'
 import { UserModel } from '../model/app.user.model';
-import {CookieService} from 'ngx-cookie-service';
-import { NgXCookies } from 'ngx-cookies';
+//import {CookieService} from 'ngx-cookie-service';
+//import { NgXCookies } from 'ngx-cookies';
 import { ContactUsComponent } from '../../app/app.contactus.component';
 import { MessageComponent } from '../component/app.message.component'
 
@@ -140,7 +140,7 @@ export class LoginComponent implements AfterContentInit , AfterViewInit{
     //Imperative Routing
     constructor(private router:Router,
         private userService:UserService,
-        private cookieService: CookieService,
+        //private cookieService: CookieService,
         private componentFactoryResolver: ComponentFactoryResolver){
 
     }
@@ -202,7 +202,7 @@ export class LoginComponent implements AfterContentInit , AfterViewInit{
    /* }*/
  
     ngOnInit() {
-        console.log(this.cookieService.get("attESSec"));
+        //console.log(this.cookieService.get("attESSec"));
     }
 
     login() {
