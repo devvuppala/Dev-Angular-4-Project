@@ -25,12 +25,12 @@ const productRoutes:Routes = [
 
                           
 @NgModule({
-    imports:[CommonModule,FormsModule,RouterModule.forChild(productRoutes)],
+    imports:[CommonModule,FormsModule,RouterModule.forChild(productRoutes)], // All modules needed for this module to work
     declarations:[ProductCatalogComponent,
             ProductItemComponent,ProductAddComponent,
             ProductItemListComponent,ProductDetailsComponent,ProductCurrency,
-            ProductDirectives,MyRepeatDirective],  // Module should declare the smart component
-    providers:[ProductService],   // This can be used in any other files in this module
+            ProductDirectives,MyRepeatDirective],  // Module should declare the smart component , dumb components , directives and pipes
+    providers:[ProductService],   // Services that can be used in this module.
     exports:[ProductCatalogComponent]      // Module should export the component (Only the smart component) , 
                                            // Do not add dumb components , add only smart components that youa re going to expose to other components
 })
